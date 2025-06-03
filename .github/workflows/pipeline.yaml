@@ -12,7 +12,7 @@ jobs:
       - run: echo "Executar testes"
       - run: echo "Build da imagem Docker"
       - run: echo "Push da imagem Docker"
-  CD:
+CD:
   needs: [CI] #Só executa depois que o CI passar
   runs-on: ubuntu-latest
     steps:
