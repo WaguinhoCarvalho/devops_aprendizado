@@ -2,7 +2,7 @@ name: Pipeline Kubernetes
 on:
   push:
     branches: [develop]
-  workflow_dispatch: #Dispara o workflow manual sem necessidade de commit
+  workflow_dispatch: # Dispara o workflow manual sem necessidade de commit
 
 jobs:
   CI:
@@ -12,9 +12,10 @@ jobs:
       - run: echo "Executar testes"
       - run: echo "Build da imagem Docker"
       - run: echo "Push da imagem Docker"
-CD:
-  needs: [CI] #Só executa depois que o CI passar
-  runs-on: ubuntu-latest
+
+  CD:
+    needs: [CI] # Só executa depois que o CI passar
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Obter código"
       - run: echo "Configurar o Kubeconfig"
