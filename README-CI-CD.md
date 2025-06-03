@@ -15,7 +15,7 @@ kubectl delete -f 02-reviem. deployment.yaml
 ## Criação da automação
 No GitHub ir em Action-> workflow
 
-Dicas pra montar o workflow - navegador marketplace git hub
+Dicas pra montar o workflow - navegador marketplace git hub actions
 https://github.com/marketplace
 
 Configurações do repositório do GitHub
