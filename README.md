@@ -1,7 +1,5 @@
 # jornada-devops-elite
 
-Comando
-
 ### Comando para acessar o Grafana
 
 ```
