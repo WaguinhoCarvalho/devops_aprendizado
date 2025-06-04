@@ -1,6 +1,5 @@
 ## Prometheus e Grafana
 
-Link repositório: https://github.com/KubeDev/jornada-devops-elite
-
+Link repositório: https://github.com/WaguinhoCarvalho/devops_aprendizado
 
 
