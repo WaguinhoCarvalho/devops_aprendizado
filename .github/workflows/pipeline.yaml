@@ -37,6 +37,7 @@ jobs:
           #file: ./02-review/src/Review-Filmes.Web/Dockerfile
           #push: true
 
+# Executar CI e CD em paralelo não esta correto sem o needs
   CD:
     needs: [CI] # Só executa depois que o CI passar
     runs-on: ubuntu-latest
@@ -44,8 +45,15 @@ jobs:
       - name: Obter código
         uses: actions/checkout@v4
 
-      - name: Configurar o Kubeconfig
-        run: echo "Configurar o Kubeconfig"
+      - run: echo "Configurar o Kubeconfig"
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8Sconfig }} #Colocar no repositorio por ser sensivel
+            
+      - run: echo "Executar o apply"
+        uses: Azure/k8s-deploy@v5
+        with:
+          manifests: ./02-review/k8s/deployment.yaml #caminho do deployment.yaml
+          images: waguinhocarvalho/review-jornada:v${{ github.run_number}}
 
-      - name: Executar o apply
-        run: echo "Executar o apply"
