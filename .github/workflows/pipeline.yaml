@@ -30,12 +30,12 @@ jobs:
       - name: Build e push da imagem Docker
         uses: docker/build-push-action@v6
         with:
-          tags: | # incrementa a cada commit v$ {{  }}
-            fabricioveronez/review-jornada:v${{ github.run_number }}  
-            fabricioveronez/review-jornada:latest
-          context: ./02-review/src
-          file: ./02-review/src/Review-Filmes.Web/Dockerfile
-          push: true
+          #tags: | # incrementa a cada commit v$ {{  }}
+           #waguinhocarvalho/review-jornada:v${{ github.run_number }}  
+           #waguinhocarvalho/review-jornada:latest
+          #context: ./02-review/src
+          #file: ./02-review/src/Review-Filmes.Web/Dockerfile
+          #push: true
 
   CD:
     needs: [CI] # Só executa depois que o CI passar
