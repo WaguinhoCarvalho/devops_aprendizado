@@ -38,17 +38,20 @@ jobs:
           #push: true
 
 # Executar CI e CD em paralelo não esta correto sem o needs
+# needs: Só executa depois que o CI passar
   CD:
-    needs: [CI] # Só executa depois que o CI passar
-    runs-on: ubuntu-latest
-    steps:
-      - name: Obter código
-        uses: actions/checkout@v4
+   needs: [CI]
+   runs-on: ubuntu-latest
+   steps:
+    - name: Obter código do projeto
+      uses: actions/checkout@v4
 
-      - name: Configurar o Kubeconfig e aplicar manifestos
-        run: |
-          echo "Configurar o Kubeconfig"
-          kubectl apply -f 02-review/k8s/deployment.yaml
-            
-      - run: echo "Executar o apply"
+    - name: Configurar o Kubeconfig
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+    - name: Aplicar manifests no cluster
+      run: kubectl apply -f 02-review/k8s/deployment.yaml
+
         
