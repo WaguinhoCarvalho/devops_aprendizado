@@ -3,9 +3,11 @@ Kubectl get nodes - verificar cluster funcionando
 kubectl get all - aplicação vazia
 
 ## Abrir projeto no vs code testar deploy no cluster:
-kubectl apply -f 02-review.deployment.yaml 02-review/k8s/deployment.yaml
+kubectl apply -f 02-review/k8s/deployment.yaml
 
 kubectl get all
+
+watch 'kubectl get svc'
 
 ## testar no navegador com o IP external 
 Sera exibido no navegador
