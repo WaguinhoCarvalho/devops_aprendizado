@@ -20,7 +20,7 @@ Dicas pra montar o workflow - navegador marketplace git hub actions
 https://github.com/marketplace
 
 Configurações do repositório do GitHub
-Secrets/Variables -> new secret -> inserir nome da variável
+Secrets and Variables -> actions -> new secret -> inserir nome da variável
 
 ## Gerar IP externo:
  cmd: LoadBalancer
