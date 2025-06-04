@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: review
-          image: fabricioveronez/review-jornada:v2
+          image: waguinhocarvalho/review-jornada:v2
           ports:
             - containerPort: 8080
           env:
