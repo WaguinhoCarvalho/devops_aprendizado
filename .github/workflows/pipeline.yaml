@@ -1,4 +1,4 @@
-name: Pipeline Kubernetes
+name: Pipeline Github Actions
 
 on:
   push:
