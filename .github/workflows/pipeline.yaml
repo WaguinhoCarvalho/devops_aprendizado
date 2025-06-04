@@ -1,8 +1,9 @@
 name: Pipeline Kubernetes
+
 on:
   push:
     branches: [develop]
-  workflow_dispatch: #Dispara o workflow manual sem necessidade de commit
+  workflow_dispatch: # Dispara o workflow manual sem necessidade de commit
 
 jobs:
   CI:
@@ -11,7 +12,7 @@ jobs:
       - name: Obter código do projeto
         uses: actions/checkout@v4
 
-      - name: Executar testes setup-dotnet"
+      - name: Executar testes setup-dotnet
         uses: actions/setup-dotnet@v3.4.2
         with:
           dotnet-version: 8.x
@@ -23,27 +24,28 @@ jobs:
       - name: Login no Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }} #nomes de variaveis na configuração do repositorio
-          password: ${{ secrets.DOCKERHUB_TOKEN }} 
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # nomes de variáveis na configuração do repositório
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build e push da imagem Docker
         uses: docker/build-push-action@v6
         with:
           tags: |
-            WaguinhoCarvalho/review-jornada:v${{ github.run_number}} #incrementa a cada commit 
-            WaguinhoCarvalho/review-jornada:latest 
+            WaguinhoCarvalho/review-jornada:v${{ github.run_number }} # incrementa a cada commit 
+            WaguinhoCarvalho/review-jornada:latest
           context: ./02-review/src
           file: ./02-review/src/Review-Filmes.Web/Dockerfile
           push: true
 
   CD:
-     needs: [CI] #Só executa depois que o CI passar
-     runs-on: ubuntu-latest
-       steps:
-      - run: echo "Obter código"
+    needs: [CI] # Só executa depois que o CI passar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
         uses: actions/checkout@v4
 
-      - run: echo "Configurar o Kubeconfig"
-            
-      - run: echo "Executar o apply"
-    
+      - name: Configurar o Kubeconfig
+        run: echo "Configurar o Kubeconfig"
+
+      - name: Executar o apply
+        run: echo "Executar o apply"
