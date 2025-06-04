@@ -1,4 +1,3 @@
-# jornada-devops-elite
 
 ### Comando para acessar o Grafana
 
