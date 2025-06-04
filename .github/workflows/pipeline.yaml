@@ -27,9 +27,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }} # nomes de variáveis na configuração do repositório
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build e push da imagem Docker
-        uses: docker/build-push-action@v6
-        with:
+      #- name: Build e push da imagem Docker
+        #uses: docker/build-push-action@v6
+        #with:
           #tags: | # incrementa a cada commit v$ {{  }}
            #waguinhocarvalho/review-jornada:v${{ github.run_number }}  
            #waguinhocarvalho/review-jornada:latest
