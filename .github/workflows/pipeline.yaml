@@ -31,8 +31,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           tags: |
-            WaguinhoCarvalho/review-jornada:v${{ github.run_number }} # incrementa a cada commit 
-            WaguinhoCarvalho/review-jornada:latest
+            fabricioveronez/review-jornada:v${{ github.run_number }} # incrementa a cada commit 
+            fabricioveronez/review-jornada:latest
           context: ./02-review/src
           file: ./02-review/src/Review-Filmes.Web/Dockerfile
           push: true
