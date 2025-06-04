@@ -30,8 +30,8 @@ jobs:
       - name: Build e push da imagem Docker
         uses: docker/build-push-action@v6
         with:
-          tags: |
-            fabricioveronez/review-jornada:v${{ github.run_number }} # incrementa a cada commit 
+          tags: | # incrementa a cada commit v$ {{  }}
+            fabricioveronez/review-jornada:v${{ github.run_number }}  
             fabricioveronez/review-jornada:latest
           context: ./02-review/src
           file: ./02-review/src/Review-Filmes.Web/Dockerfile
