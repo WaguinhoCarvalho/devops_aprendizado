@@ -2,21 +2,48 @@ name: Pipeline Kubernetes
 on:
   push:
     branches: [develop]
-  workflow_dispatch: # Dispara o workflow manual sem necessidade de commit
+  workflow_dispatch: #Dispara o workflow manual sem necessidade de commit
 
 jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Obter código"
-      - run: echo "Executar testes"
-      - run: echo "Build da imagem Docker"
-      - run: echo "Push da imagem Docker"
+      - name: Obter código do projeto
+        uses: actions/checkout@v4
 
-  CD:
-    needs: [CI] # Só executa depois que o CI passar
-    runs-on: ubuntu-latest
-    steps:
+      - name: Executar testes setup-dotnet"
+        uses: actions/setup-dotnet@v3.4.2
+        with:
+          dotnet-version: 8.x
+
+      - name: Executar testes
+        working-directory: ./02-review/src/Review-Filmes.Test.Unit
+        run: dotnet test
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }} #nomes de variaveis na configuração do repositorio
+          password: ${{ secrets.DOCKERHUB_TOKEN }} 
+
+      - name: Build e push da imagem Docker
+        uses: docker/build-push-action@v6
+        with:
+          tags: |
+            WaguinhoCarvalho/review-jornada:v${{ github.run_number}} 
+            WaguinhoCarvalho/review-jornada:latest 
+          context: ./02-review/src
+          file: ./02-review/src/Review-Filmes.Web/Dockerfile
+          push: true
+
+   CD:
+     needs: [CI] #Só executa depois que o CI passar
+     runs-on: ubuntu-latest
+       steps:
       - run: echo "Obter código"
+        uses: actions/checkout@v4
+
       - run: echo "Configurar o Kubeconfig"
+            
       - run: echo "Executar o apply"
+    
